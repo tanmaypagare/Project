@@ -2,16 +2,8 @@
 #include <vector>
 #include <algorithm>
 #include <cstring>
+#include "InventoryManager.h"
 #include "../include/inventory.h"
-
-class InventoryManager {
-public:
-    void addItem();
-    void viewItem();
-    void updateItem();
-    void deleteItem();
-    void listItems();
-};
 
 void InventoryManager::addItem() {
     Item item;
@@ -83,11 +75,24 @@ void InventoryManager::updateItem() {
     std::cin.ignore();
     std::cin.getline(item.name, 40);
 
+    if (strlen(item.name) == 0) {
+        std::cout << "Name cannot be empty\n";
+        return;
+    }
+
     std::cout << "Enter new quantity: ";
     std::cin >> item.quantity;
+    if (item.quantity < 0) {
+        std::cout << "Invalid quantity\n";
+        return;
+    }
 
     std::cout << "Enter new price: ";
     std::cin >> item.price;
+    if (item.price < 0) {
+        std::cout << "Invalid price\n";
+        return;
+    }
 
     if (update_item(id, &item))
         std::cout << "Updated successfully\n";
@@ -111,6 +116,11 @@ void InventoryManager::listItems() {
 
     int count = list_items(items.data(), 100);
     items.resize(count);
+
+    if (count == 0) {
+        std::cout << "No items in inventory\n";
+        return;
+    }
 
     std::sort(items.begin(), items.end(), [](Item a, Item b) {
         return a.id < b.id;

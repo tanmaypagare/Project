@@ -1,5 +1,5 @@
 #include <iostream>
-#include "InventoryManager.cpp"
+#include "InventoryManager.h"
 
 int main() {
     InventoryManager manager;
