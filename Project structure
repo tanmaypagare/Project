@@ -1,0 +1,12 @@
+inventory_manager/
+│
+├── include/
+│   └── inventory.h
+│
+├── src/
+│   ├── inventory.c
+│   ├── InventoryManager.cpp
+│   └── main.cpp
+│
+├── Makefile
+└── README.md
